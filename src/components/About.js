@@ -44,7 +44,6 @@ const About = () => {
             <img
               src="https://prasadyash2411.github.io/ecom-website/img/Band%20Members.png"
               className="w-48 h-48 rounded-full p-7 float-left"
-              img
             />
             <p className="text-justify">
               Lorem ipsum carrots enhanced rebates. Excellent sayings of a man

@@ -4,6 +4,9 @@ import Body from "./components/Body";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import About from "./components/About";
+import Contact from "../src/components/Contact";
+import ProductDetail from "./components/ProductDetail";
+import Login from "./components/Login";
 import { Provider } from "react-redux";
 import store from "./RTK/store";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
@@ -31,6 +34,18 @@ const AppRouter = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/store/product/:id",
+        element: <ProductDetail />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },
