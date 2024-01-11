@@ -1,13 +1,36 @@
 import { useDispatch, useSelector } from "react-redux";
 import { cartOpen, removeFromCart, clearCart } from "../RTK/cartSlice";
+import axios from "axios";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.cartItems);
-
   const dispatch = useDispatch();
 
-  function removeItemCart(item) {
-    dispatch(removeFromCart(item));
+  async function removeItemCart(item) {
+    try {
+      let userId = localStorage.getItem("userId");
+      await axios.delete(`http://127.0.0.1:3800/cartInfo/${userId}/${item.id}`);
+      dispatch(removeFromCart(item));
+    } catch (error) {
+      console.log("Error removeItemCart ", error);
+    }
+  }
+
+  async function clearCartItem() {
+    try {
+      let userId = localStorage.getItem("userId");
+      if (cartItems.length) {
+        await axios.delete(
+          `http://127.0.0.1:3800/cartInfo/${userId}/${"empty"}`
+        );
+        dispatch(clearCart());
+        alert("Thanks For Purchasing..!");
+      } else {
+        alert("Add something to purchase");
+      }
+    } catch (err) {
+      console.error("Error clearCart", err);
+    }
   }
 
   return (
@@ -60,14 +83,7 @@ const Cart = () => {
           </button>
           <button
             className="w-20 h-10 bg-green-400 text-white rounded-md"
-            onClick={() => {
-              if (cartItems.length) {
-                dispatch(clearCart());
-                alert("Thanks For Purchasing..!");
-              } else {
-                alert("Add something to purchase");
-              }
-            }}
+            onClick={() => clearCartItem()}
           >
             Purchase
           </button>

@@ -4,12 +4,19 @@ import { cartOpen } from "../RTK/cartSlice";
 
 const Header = (props) => {
   let cartItem = useSelector((store) => store.cart.cartItems);
+  let isLogin = localStorage.getItem("authToken");
   const dispatch = useDispatch();
+
+  function removeLocalStorage() {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+  }
 
   return (
     <section className="z-20 absolute">
       <div className="w-full p-3 bg-black fixed flex justify-end">
-        <section className="w-[60%] flex justify-start">
+        <section className="w-[68%] flex justify-start">
           <section className="w-[70%] flex justify-between">
             <ul className="flex gap-16 text-white ">
               <li>
@@ -36,9 +43,18 @@ const Header = (props) => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/login" className="aria-[current=page]:underline">
-                  login
-                </NavLink>
+                {isLogin ? (
+                  <NavLink to="/" className="aria-[current=page]:underline">
+                    <button onClick={() => removeLocalStorage()}>logout</button>
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    to="/login"
+                    className="aria-[current=page]:underline"
+                  >
+                    login
+                  </NavLink>
+                )}
               </li>
             </ul>
 

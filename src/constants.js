@@ -36,3 +36,5 @@ export const eventVenue = [
   { id: 236, date: "AUG 2", city: "LAS VEGAS, NV", place: "T-MOBILE ARENA" },
   { id: 237, date: "AUG 7", city: "CONCORD, CA", place: "CONCORD PAVILION" },
 ];
+
+export const externalApi = "5c4320c01b114a6291473d20d0eec6ff";

@@ -11,7 +11,9 @@ const cartSlice = createSlice({
       state.isCartOpen = !state.isCartOpen;
     },
     addToCart: (state, actions) => {
-      state.cartItems.push(actions.payload);
+      let bool = Array.isArray(actions.payload);
+      if (bool) state.cartItems = [...actions.payload];
+      else state.cartItems.push(actions.payload);
     },
     removeFromCart: (state, actions) => {
       state.cartItems = state.cartItems.filter(
@@ -20,11 +22,10 @@ const cartSlice = createSlice({
     },
     clearCart: (state, action) => {
       state.cartItems = [];
-      // alert("Thanks For Purchasing..!");
     },
   },
 });
 
-export const { cartOpen, addToCart, removeFromCart, clearCart } =
+export const { cartOpen, addToCart, removeFromCart, clearCart, addId } =
   cartSlice.actions;
 export default cartSlice.reducer;
